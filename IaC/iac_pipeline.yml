@@ -35,5 +35,5 @@ stages:
     - bash: |
         cd IaC
         terraform init
-        terraform $(Action) -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
+        terraform ${{ parameters.Action }} -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
       displayName: 'terraform test'
