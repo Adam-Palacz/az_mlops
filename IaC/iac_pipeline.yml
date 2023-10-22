@@ -25,8 +25,8 @@ stages:
         whoami
       displayName: 'Show Environment'
 
-    - script: sudo apt install azure-cli -y
-      displayName: 'Install azure-cli'
+    # - script: sudo apt install azure-cli -y
+    #   displayName: 'Install azure-cli'
 
 - stage: Build
   jobs:
@@ -36,5 +36,5 @@ stages:
         cd IaC
         terraform init
         terraform fmt
-        terraform ${{ parameters.Action }} -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
+        terraform ${{ parameters.Action }} -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" -var="sa_key=$(sa_key)" --auto-approve
       displayName: 'terraform test'
