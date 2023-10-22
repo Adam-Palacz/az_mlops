@@ -10,7 +10,7 @@ parameters:
   values:
     - apply
     - destroy
-  default: destroy
+  default: apply
 
 variables:
 - group: terraform-sp-var-group
@@ -28,7 +28,7 @@ stages:
     - script: sudo apt install azure-cli -y
       displayName: 'Install azure-cli'
 
-- stage: Buiid
+- stage: Build
   jobs:
   - job: BuildDestroyIaC
     steps:
