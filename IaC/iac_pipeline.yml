@@ -10,6 +10,7 @@ parameters:
   values:
     - apply
     - destroy
+  default: apply
 
 variables:
 - group: terraform-sp-var-group
