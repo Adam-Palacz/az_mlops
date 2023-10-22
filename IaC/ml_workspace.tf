@@ -8,7 +8,7 @@ resource "azurerm_application_insights" "ai-ap-dev" {
 }
 
 resource "azurerm_key_vault" "kv-ap-dev" {
-  name                = "workspaceapkeyvault"
+  name                = "workspaceapmlopskeyvault"
   location            = azurerm_resource_group.rg-mlops-ap-dev.location
   resource_group_name = azurerm_resource_group.rg-mlops-ap-dev.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "kv-ap-dev" {
 }
 
 resource "azurerm_storage_account" "sa-ap-dev" {
-  name                     = "workspacestorageaccount"
+  name                     = "saapmlopsworkspacedev"
   location                 = azurerm_resource_group.rg-mlops-ap-dev.location
   resource_group_name      = azurerm_resource_group.rg-mlops-ap-dev.name
   account_tier             = "Standard"
