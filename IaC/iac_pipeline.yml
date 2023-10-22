@@ -10,19 +10,17 @@ parameters:
   values:
     - apply
     - destroy
-  default: apply
+  default: destroy
 
 variables:
 - group: terraform-sp-var-group
 
 stages:
-- stage: Buiid
+- stage: Install
   jobs:
   - job: InitialJob
     steps:
     - script: |
-        echo Add other tasks to build, test, and deploy your project.
-        echo See https://aka.ms/yaml
         ls -la
         whoami
       displayName: 'Show Environment'
@@ -30,6 +28,8 @@ stages:
     - script: sudo apt install azure-cli -y
       displayName: 'Install azure-cli'
 
+- stage: Buiid
+  jobs:
   - job: BuildDestroyIaC
     steps:
     - bash: |
