@@ -36,5 +36,6 @@ stages:
         cd IaC
         terraform init
         terraform fmt
-        terraform ${{ parameters.Action }} -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" -var="sa_key=$(sa_key)" --auto-approve
+        export TF_VAR_sa_key=$(sa_key)
+        terraform ${{ parameters.Action }} -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
       displayName: 'terraform test'
