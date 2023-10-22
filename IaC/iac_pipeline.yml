@@ -1,5 +1,5 @@
 trigger:
-- main
+- IaC
 
 pool: ap_vm1_test
 
@@ -24,10 +24,11 @@ stages:
         echo See https://aka.ms/yaml
         ls -la
         whoami
+      displayName: 'Show Environment'
 
     - script: sudo apt install azure-cli -y
       displayName: 'Install azure-cli'
-      
+
   - job: BuildDestroyIaC
     steps:
     - bash: |
