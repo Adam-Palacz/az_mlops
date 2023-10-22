@@ -3,21 +3,35 @@ trigger:
 
 pool: ap_vm1_test
 
+parameters:
+- name: Action
+  displayName: 'Apply or Destroy IaC'
+  type: string
+  values:
+    - apply
+    - destroy
+
 variables:
 - group: terraform-sp-var-group
 
-steps:
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    ls -la
-    whoami
+stages:
+- stage: Buiid
+  jobs:
+  - job: InitialJob
+    steps:
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+        ls -la
+        whoami
 
-- script: sudo apt install azure-cli -y
-  displayName: 'Install azure-cli'
-
-- bash: |
-    cd IaC
-    terraform init
-    terraform apply -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
-  displayName: 'terraform test'
+    - script: sudo apt install azure-cli -y
+      displayName: 'Install azure-cli'
+      
+  - job: BuildDestroyIaC
+    steps:
+    - bash: |
+        cd IaC
+        terraform init
+        terraform $(Action) -var="client_id=$(appId)" -var="client_secret=$(password)" -var="subscription_id=$(subscriptionId)" -var="tenant_id=$(tenant)" --auto-approve
+      displayName: 'terraform test'
